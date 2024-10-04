@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/backend.iml" filepath="$PROJECT_DIR$/backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api/backend.api.iml" filepath="$PROJECT_DIR$/.idea/modules/api/backend.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api/backend.api.main.iml" filepath="$PROJECT_DIR$/.idea/modules/api/backend.api.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api/backend.api.test.iml" filepath="$PROJECT_DIR$/.idea/modules/api/backend.api.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend.main.iml" filepath="$PROJECT_DIR$/.idea/modules/backend.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/notification/backend.notification.iml" filepath="$PROJECT_DIR$/.idea/modules/notification/backend.notification.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/notification/backend.notification.main.iml" filepath="$PROJECT_DIR$/.idea/modules/notification/backend.notification.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/notification/backend.notification.test.iml" filepath="$PROJECT_DIR$/.idea/modules/notification/backend.notification.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pos/backend.pos.iml" filepath="$PROJECT_DIR$/.idea/modules/pos/backend.pos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pos/backend.pos.main.iml" filepath="$PROJECT_DIR$/.idea/modules/pos/backend.pos.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pos/backend.pos.test.iml" filepath="$PROJECT_DIR$/.idea/modules/pos/backend.pos.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/backend.shared.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/backend.shared.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/backend.shared.main.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/backend.shared.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/backend.shared.test.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/backend.shared.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend.test.iml" filepath="$PROJECT_DIR$/.idea/modules/backend.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/todo/backend.todo.iml" filepath="$PROJECT_DIR$/.idea/modules/todo/backend.todo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/todo/backend.todo.main.iml" filepath="$PROJECT_DIR$/.idea/modules/todo/backend.todo.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/todo/backend.todo.test.iml" filepath="$PROJECT_DIR$/.idea/modules/todo/backend.todo.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/url/backend.url.iml" filepath="$PROJECT_DIR$/.idea/modules/url/backend.url.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/url/backend.url.main.iml" filepath="$PROJECT_DIR$/.idea/modules/url/backend.url.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/url/backend.url.test.iml" filepath="$PROJECT_DIR$/.idea/modules/url/backend.url.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/user/backend.user.iml" filepath="$PROJECT_DIR$/.idea/modules/user/backend.user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/user/backend.user.main.iml" filepath="$PROJECT_DIR$/.idea/modules/user/backend.user.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/user/backend.user.test.iml" filepath="$PROJECT_DIR$/.idea/modules/user/backend.user.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/www/backend.www.iml" filepath="$PROJECT_DIR$/.idea/modules/www/backend.www.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/www/backend.www.main.iml" filepath="$PROJECT_DIR$/.idea/modules/www/backend.www.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/www/backend.www.test.iml" filepath="$PROJECT_DIR$/.idea/modules/www/backend.www.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/frontend.iml" filepath="$PROJECT_DIR$/frontend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hadiubaidillah-R4.iml" filepath="$PROJECT_DIR$/hadiubaidillah-R4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/frontend/todo.iml" filepath="$PROJECT_DIR$/frontend/todo.iml" />
+    </modules>
+  </component>
+</project>

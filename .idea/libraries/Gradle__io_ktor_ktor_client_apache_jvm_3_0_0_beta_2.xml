@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: io.ktor:ktor-client-apache-jvm:3.0.0-beta-2" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="io.ktor" artifactId="ktor-client-apache-jvm" version="3.0.0-beta-2" baseVersion="3.0.0-beta-2" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-apache-jvm/3.0.0-beta-2/16df192a0245a6df8f36eab5bfcf13eca8fa4740/ktor-client-apache-jvm-3.0.0-beta-2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

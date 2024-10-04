@@ -1,0 +1,7 @@
+{
+  "realm": "hadi",
+  "auth-server-url": "https://keycloak.hadiubaidillah.com/",
+  "resource": "todo-client",
+  "confidential-port": 0,
+  "ssl-required": "external"
+}

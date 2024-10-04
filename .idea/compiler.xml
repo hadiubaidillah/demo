@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="backend" target="21" />
+      <module name="backend.api" target="21" />
+      <module name="backend.api.main" target="21" />
+      <module name="backend.api.test" target="21" />
+      <module name="backend.main" target="21" />
+      <module name="backend.notification" target="21" />
+      <module name="backend.notification.main" target="21" />
+      <module name="backend.notification.test" target="21" />
+      <module name="backend.pos" target="21" />
+      <module name="backend.pos.main" target="21" />
+      <module name="backend.pos.test" target="21" />
+      <module name="backend.shared" target="21" />
+      <module name="backend.shared.main" target="21" />
+      <module name="backend.shared.test" target="21" />
+      <module name="backend.test" target="21" />
+      <module name="backend.todo" target="21" />
+      <module name="backend.todo.main" target="21" />
+      <module name="backend.todo.test" target="21" />
+      <module name="backend.url" target="21" />
+      <module name="backend.url.main" target="21" />
+      <module name="backend.url.test" target="21" />
+      <module name="backend.user" target="21" />
+      <module name="backend.user.main" target="21" />
+      <module name="backend.user.test" target="21" />
+      <module name="backend.www" target="21" />
+      <module name="backend.www.main" target="21" />
+      <module name="backend.www.test" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
