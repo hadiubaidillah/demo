@@ -26,7 +26,7 @@ fun initRabbitMQProducer() {
     // Declare Exchange
     rabbitChannel.exchangeDeclare(exchangeName, "direct", true)
 
-    // DeklaDeclarerasi Quorum Queue
+    // Declare Quorum Queue
     rabbitChannel.queueDeclare(queueName, true, false, false, mapOf("x-queue-type" to "quorum"))
 
     // Bind Queue ke Exchange with Routing Key

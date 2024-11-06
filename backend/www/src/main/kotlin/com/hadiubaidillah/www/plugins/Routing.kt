@@ -2,6 +2,7 @@ package com.hadiubaidillah.www.plugins
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
+import com.auth0.jwt.exceptions.TokenExpiredException
 import com.auth0.jwt.interfaces.DecodedJWT
 import com.hadiubaidillah.shared.plugins.Session
 import com.hadiubaidillah.shared.plugins.jwkProvider
@@ -100,17 +101,18 @@ fun Application.configureRouting() {
             val accessToken = call.sessions.get<Session>()?.accessToken
 
             // Jika token tidak ada, tetap ke halaman index tanpa data user login
+            val defaultModel =  mapOf(
+                "protocolUrl" to PROTOCOL_URL,
+                "domainUrl" to DOMAIN_URL,
+                "login" to false
+            )
             if (accessToken == null) {
-                call.respond(ThymeleafContent("index", mapOf(
-                    "protocolUrl" to PROTOCOL_URL,
-                    "domainUrl" to DOMAIN_URL,
-                    "login" to false
-                )))
+                call.respond(ThymeleafContent("index", defaultModel))
                 return@get
             }
 
             try {
-                // Verifikasi token menggunakan JWK dari Keycloak
+                // Verify token menggunakan JWK dari Keycloak
                 val decodedJWT: DecodedJWT = JWT.decode(accessToken)
                 val jwk = jwkProvider.get(decodedJWT.keyId)
                 val algorithm = Algorithm.RSA256(jwk.publicKey as RSAPublicKey, null)
@@ -129,10 +131,15 @@ fun Application.configureRouting() {
                     "email" to decodedJWT.getClaim("email").asString(),
                     "accessToken" to accessToken,
                 )))
-            } catch (e: Exception) {
+            }
+            catch (e: TokenExpiredException) {
+                e.printStackTrace()
+                call.respondRedirect("/login")
+            }
+            catch (e: Exception) {
                 // Jika token tidak valid, tetap ke halaman index tanpa data user login
                 e.printStackTrace()
-                call.respond(ThymeleafContent("index", mapOf("login" to false)))
+                call.respond(ThymeleafContent("index", defaultModel))
             }
         }
 

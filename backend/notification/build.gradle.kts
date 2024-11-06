@@ -1,7 +1,7 @@
 
 
 plugins {
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.20"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.21"
     alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.ktor)
     application
@@ -43,6 +43,7 @@ dependencies {
     implementation(libs.exposed.jdbc)
     implementation(libs.exposed.json)
     implementation(libs.mysql.connector.java)
+    implementation(libs.postgresql)
 
     implementation(libs.koin.ktor)
     implementation(libs.koin.logger.slf4j)

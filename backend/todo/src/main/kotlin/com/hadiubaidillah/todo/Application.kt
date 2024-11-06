@@ -4,6 +4,7 @@ import com.hadiubaidillah.shared.plugins.configureDatabases
 import com.hadiubaidillah.shared.plugins.configureSecurity
 import com.hadiubaidillah.shared.plugins.configureSerialization
 import com.hadiubaidillah.shared.plugins.configureStatusPages
+import com.hadiubaidillah.todo.plugins.configureDatabaseInitialize
 import com.hadiubaidillah.todo.plugins.configureKoin
 import com.hadiubaidillah.todo.plugins.configureRabbitMQProducer
 import com.hadiubaidillah.todo.plugins.configureRouting
@@ -26,6 +27,7 @@ fun Application.module() {
     configureKoin()
     configureSerialization()
     configureDatabases()
+    configureDatabaseInitialize()
     configureSecurity()
     configureStatusPages()
     configureRouting()

@@ -18,10 +18,13 @@ import kotlin.getValue
 fun Application.launchRabbitMQConsumer() {
     val notificationService: NotificationService by inject()
     GlobalScope.launch(Dispatchers.IO) { // suitable for long-term tasks that do not depend on any life cycle
-        val connection = factory.newConnection()
-        val channel = connection.createChannel()
+        val rabbitConnection = factory.newConnection()
+        val rabbitChannel = rabbitConnection.createChannel()
 
         val queueName = System.getenv("RABBITMQ_TASKS_QUEUE")
+
+        // Declare Quorum Queue
+        rabbitChannel.queueDeclare(queueName, true, false, false, mapOf("x-queue-type" to "quorum"))
 
         val deliverCallback = DeliverCallback { _, delivery ->
             val message = String(delivery.body)
@@ -32,6 +35,6 @@ fun Application.launchRabbitMQConsumer() {
         }
 
         println("Waiting for messages in quorum queue: $queueName")
-        channel.basicConsume(queueName, true, deliverCallback) { _ -> }
+        rabbitChannel.basicConsume(queueName, true, deliverCallback) { _ -> }
     }
 }
