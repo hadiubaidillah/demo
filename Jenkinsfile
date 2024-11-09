@@ -71,7 +71,6 @@ pipeline {
 			steps {
 				sshagent(credentials: [CREDENTIALS_ID]) {
 					sh """
-					ssh ${REMOTE_USER}@${REMOTE_HOST} 'whoami'
 					scp -o StrictHostKeyChecking=no target/${WAR_FILE} ${REMOTE_USER}@${REMOTE_HOST}:${DEV_DEST_DIR}
 					ssh -o StrictHostKeyChecking=no -t ${REMOTE_USER}@${REMOTE_HOST} "nohup ~/jetty_restart.sh > /dev/null 2>&1 & disown"
 					"""
