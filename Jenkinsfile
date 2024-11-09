@@ -11,60 +11,45 @@ pipeline {
 	}
 
 	stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-        stage('Scan Changes') {
+        stage('Detect Changes') {
             steps {
                 script {
-                    // Dapatkan daftar file yang berubah sejak commit terakhir
-                    def changedFiles = sh(script: "git diff --name-only HEAD HEAD~1", returnStdout: true).trim().split('\n')
+                    // Mendapatkan daftar file yang berubah
+                    def changes = sh(script: "git diff --name-only HEAD~1", returnStdout: true).trim().split("\n")
 
-                    // Filter file yang berubah untuk folder backend dan frontend
-                    def backendChanges = []
-                    def frontendChanges = []
-
-                    for (file in changedFiles) {
-                        // Periksa apakah file berada di folder backend dan tidak termasuk dalam folder yang dikecualikan
-                        if (file.startsWith('backend/') && !EXCLUDE_FOLDERS.tokenize(',').any { file.contains(it) }) {
-                            backendChanges.add(file)
-                        }
-
-                        // Periksa apakah file berada di folder frontend/todo
-                        if (file.startsWith('frontend/todo/')) {
-                            frontendChanges.add(file)
-                        }
+                    // Cek apakah ada perubahan di backend atau frontend
+                    if (changes.any { it.startsWith("backend/api") }) {
+                        env.BUILD_SERVICE1 = 'true'
                     }
-
-                    // Set environment variable untuk menentukan apakah ada perubahan
-                    env.CHANGED_BACKEND = backendChanges.size() > 0
-                    env.CHANGED_FRONTEND = frontendChanges.size() > 0
+                    if (changes.any { it.startsWith("backend/notification") }) {
+                        env.BUILD_SERVICE2 = 'true'
+                    }
+                    if (changes.any { it.startsWith("frontend/todo") }) {
+                        env.BUILD_WEB1 = 'true'
+                    }
                 }
             }
         }
-        stage('Build Backend') {
-            when {
-                expression { return env.CHANGED_BACKEND == 'true' }
-            }
+        stage('Build Backend Services') {
+            when { environment name: 'BUILD_SERVICE1', value: 'true' }
             steps {
-                echo 'Building changed backend services...'
-                script {
+                dir('backend/api') {
+                    sh './gradlew build'
+                }
+            }
+            when { environment name: 'BUILD_SERVICE2', value: 'true' }
+            steps {
+                dir('backend/notification') {
                     sh './gradlew build'
                 }
             }
         }
-        stage('Build Frontend') {
-            when {
-                expression { return env.CHANGED_FRONTEND == 'true' }
-            }
+        stage('Build Frontend Applications') {
+            when { environment name: 'BUILD_WEB1', value: 'true' }
             steps {
-                echo 'Building changed frontend apps...'
-                script {
-                    dir('frontend/todo') {
-                        sh 'npm install && npm run build'
-                    }
+                dir('frontend/todo') {
+                    sh 'npm install'
+                    sh 'npm run build'
                 }
             }
         }
