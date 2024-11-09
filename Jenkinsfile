@@ -4,9 +4,9 @@ pipeline {
 	environment {
 		DEV_DEST_DIR = '/home/oauth2/instance/staging/webapps/oauth2.war'
 		WAR_FILE = 'oauth2.war'
-		REMOTE_USER = 'oauth2'
+		REMOTE_USER = 'hadi'
 		REMOTE_HOST = 'localhost'
-		CREDENTIALS_ID = 'oauth2'
+		CREDENTIALS_ID = 'hadi'
         EXCLUDE_FOLDERS = '.env,.kotlin,gradle'
 	}
 
