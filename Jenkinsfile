@@ -63,7 +63,6 @@ pipeline {
 		}
 		stage('Build') {
 			steps {
-				sh 'pwd'
 				sh 'ls -al target/'
 				sh 'mvn install'
 			}
