@@ -3,31 +3,27 @@ package com.hadiubaidillah.api.plugins
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.request.HttpRequestBuilder
-import io.ktor.client.request.forms.FormDataContent
-import io.ktor.client.request.forms.MultiPartFormDataContent
-import io.ktor.client.request.request
-import io.ktor.client.request.setBody
-import io.ktor.client.request.url
+import io.ktor.client.request.forms.submitFormWithBinaryData
+import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.bodyAsChannel
-import io.ktor.http.ContentType
-import io.ktor.http.content.readAllParts
-import io.ktor.http.contentType
-import io.ktor.serialization.kotlinx.json.json
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.content.PartData
+import io.ktor.http.content.forEachPart
 import io.ktor.server.application.*
-import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.server.request.contentLength
-import io.ktor.server.request.contentType
-import io.ktor.server.request.httpMethod
+import io.ktor.server.plugins.autohead.AutoHeadResponse
 import io.ktor.server.request.receiveMultipart
-import io.ktor.server.request.receiveParameters
-import io.ktor.server.request.receiveText
 import io.ktor.server.request.uri
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import io.ktor.utils.io.toByteArray
+import io.ktor.server.plugins.swagger.*
+import io.ktor.server.request.isMultipart
 
 fun Application.configureRouting() {
+    install(AutoHeadResponse)
+    //install(CallLogging)
+
+    val client = HttpClient(CIO)
+
     routing {
         get("/") {
             call.respondText("Hello Ini API!")
@@ -38,81 +34,52 @@ fun Application.configureRouting() {
         get("/json-test") {
             call.respond(mapOf("message" to "Hello, World!"))
         }
-        route("notification") {
-            handleProxyRequest("http://localhost:82")
+        // Define proxy routes for each service
+        mapOf(
+            "/notification" to "http://localhost:40082",
+            "/user" to "http://localhost:40084",
+            "/pos" to "http://localhost:40085",
+            "/task" to "http://localhost:40086",
+            "/url" to "http://localhost:40087"
+        ).forEach { (routePath, targetUrl) ->
+            route("$routePath/{...}") {
+                handle {
+                    call.proxyRequest(client, targetUrl, routePath)
+                }
+            }
         }
-        route("user") {
-            handleProxyRequest("http://localhost:84")
-        }
-        route("pos") {
-            handleProxyRequest("http://localhost:85")
-        }
-        route("task") {
-            handleProxyRequest("http://localhost:86")
-        }
-        route("url") {
-            handleProxyRequest("http://localhost:87")
-        }
+        swaggerUI(path = "swagger", swaggerFile = "openapi/documentation.yaml")
     }
 }
 
-private fun Routing.handleProxyRequest(targetUrl: String) {
-    val client = HttpClient(CIO) {
-        install(ContentNegotiation) {
-            json()
+suspend fun ApplicationCall.proxyRequest(client: HttpClient, targetUrl: String, prefix: String) {
+    val path = request.uri.removePrefix(prefix)
+
+    // Helper function to add all headers from incoming request to the outgoing client request
+    fun HttpRequestBuilder.addAllHeaders() {
+        request.headers.forEach { key, values ->
+            values.forEach { value ->
+                headers.append(key, value)
+            }
         }
     }
 
-    // Wildcard route untuk menangani semua path di bawah route yang diatur
-    route("{...}") {
-        handle {
-            // Tangkap path dinamis
-            println("call.request.uri: " + call.request.uri)
-            val proxyRequestPath = removeFirstSegment(call.request.uri) //call.parameters.getAll("{...}")?.joinToString("/") ?: ""
-            // Buat URL lengkap yang akan diteruskan
-            val url = "$targetUrl$proxyRequestPath"
-            println("Proxying request to $url")
-            println("call.request.httpMethod: " + call.request.httpMethod)
-            println("call.parameters: " + call.parameters + " - " + call.parameters.getAll("{...}")?.joinToString("/"))
-            println("call.request.contentType().withoutParameters()): " + call.request.contentType().withoutParameters())
-            println("call.request.contentLength(): " + call.request.contentLength())
-            println("ContentType.Application.FormUrlEncoded: " + ContentType.Application.FormUrlEncoded)
-            println("ContentType.MultiPart.FormData: " + ContentType.MultiPart.FormData)
+    val response: HttpResponse = if (request.isMultipart()) {
+        val parts = mutableListOf<PartData>()
+        receiveMultipart().forEachPart { part -> parts.add(part) }
 
-            // Siapkan request builder
-            val requestBody = when (val contentType = call.request.contentType().withoutParameters()) {
-                ContentType.Application.FormUrlEncoded -> {
-                    val formParameters = call.receiveParameters()
-                    FormDataContent(formParameters)
-                }
-                ContentType.MultiPart.FormData -> {
-                    val multipartData = call.receiveMultipart()
-                    MultiPartFormDataContent(multipartData.readAllParts())
-                }
-                else -> {
-                    call.receiveText()
-                }
-            }
-
-            val request = HttpRequestBuilder().apply {
-                method = call.request.httpMethod
-                url(url)
-                headers.appendAll(call.request.headers)
-                setBody(requestBody)
-            }
-
-            val response: HttpResponse = client.request(request)
-            call.respondBytes(response.bodyAsChannel().toByteArray(), response.contentType(), response.status)
-        }
-    }
-}
-
-fun removeFirstSegment(input: String): String {
-    val segments = input.split("/")
-    // Jika panjang segmen lebih dari 1, kembalikan hasil dengan segmen pertama dihapus
-    return if (segments.size > 1) {
-        segments.drop(2).joinToString("/", "/")
+        client.submitFormWithBinaryData(
+            url = "$targetUrl$path",
+            formData = parts
+        ) {
+            addAllHeaders()
+        }.also { parts.forEach { it.dispose() } }
     } else {
-        input
+        client.get("$targetUrl$path") {
+            addAllHeaders()
+        }
     }
+
+    // Forward response to client
+    respondText(response.bodyAsText())
 }

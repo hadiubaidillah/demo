@@ -20,8 +20,6 @@ application {
 
 tasks.named<JavaExec>("run") {
     environment(envVariables)
-    //envVariables.forEach { (key, value) -> println("$key = $value") }
-    //println("ini di run")
 }
 
 dependencies {
@@ -32,6 +30,8 @@ dependencies {
     implementation(libs.ktor.server.cio)
     implementation(libs.ktor.server.auth)
     implementation(libs.ktor.server.auth.jwt)
+    implementation(libs.ktor.server.auto.head.response)
+    implementation(libs.ktor.server.swagger)
     implementation(libs.ktor.server.thymeleaf)
 
     implementation(libs.ktor.client.cio)
