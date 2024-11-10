@@ -18,34 +18,39 @@ pipeline {
                     def changes = sh(script: "git diff --name-only HEAD~1", returnStdout: true).trim().split("\n")
 
                     // Cek apakah ada perubahan di backend atau frontend
-                    if (changes.any { it.startsWith("backend/api") }) {
-                        env.BUILD_SERVICE1 = 'true'
-                    }
-                    if (changes.any { it.startsWith("backend/notification") }) {
-                        env.BUILD_SERVICE2 = 'true'
-                    }
-                    if (changes.any { it.startsWith("frontend/todo") }) {
-                        env.BUILD_WEB1 = 'true'
-                    }
+                    env.BUILD_SERVICE1 = changes.any { it.startsWith("backend/api") } ? 'true' : 'false'
+                    env.BUILD_SERVICE2 = changes.any { it.startsWith("backend/notification") } ? 'true' : 'false'
+                    env.BUILD_WEB1 = changes.any { it.startsWith("frontend/todo") } ? 'true' : 'false'
                 }
             }
         }
-        stage('Build Backend Services') {
-            when { environment name: 'BUILD_SERVICE1', value: 'true' }
+
+        stage('Build Backend Service 1') {
+            when {
+                expression { env.BUILD_SERVICE1 == 'true' }
+            }
             steps {
                 dir('backend/api') {
                     sh './gradlew build'
                 }
             }
-            when { environment name: 'BUILD_SERVICE2', value: 'true' }
+        }
+
+        stage('Build Backend Service 2') {
+            when {
+                expression { env.BUILD_SERVICE2 == 'true' }
+            }
             steps {
                 dir('backend/notification') {
                     sh './gradlew build'
                 }
             }
         }
-        stage('Build Frontend Applications') {
-            when { environment name: 'BUILD_WEB1', value: 'true' }
+
+        stage('Build Frontend Web1') {
+            when {
+                expression { env.BUILD_WEB1 == 'true' }
+            }
             steps {
                 dir('frontend/todo') {
                     sh 'npm install'
@@ -53,6 +58,7 @@ pipeline {
                 }
             }
         }
+    }
 		/*stage("Prepare") {
 			steps {
 				echo("Start Job : ${env.JOB_NAME}")
