@@ -30,8 +30,8 @@ pipeline {
                 expression { env.BUILD_SERVICE1 == 'true' }
             }
             steps {
-                dir('backend/api') {
-                    sh './gradlew build'
+                dir('backend') {
+                    sh './gradlew api:build'
                 }
             }
         }
@@ -41,8 +41,8 @@ pipeline {
                 expression { env.BUILD_SERVICE2 == 'true' }
             }
             steps {
-                dir('backend/notification') {
-                    sh './gradlew build'
+                dir('backend') {
+                    sh './gradlew notification:build'
                 }
             }
         }
