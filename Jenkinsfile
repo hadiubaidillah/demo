@@ -20,7 +20,7 @@ pipeline {
                     // Cek apakah ada perubahan di backend atau frontend
                     env.BUILD_SERVICE1 = changes.any { it.startsWith("backend/api") } ? 'true' : 'true'
                     env.BUILD_SERVICE2 = changes.any { it.startsWith("backend/notification") } ? 'true' : 'true'
-                    env.BUILD_WEB1 = changes.any { it.startsWith("frontend/todo") } ? 'true' : 'true
+                    env.BUILD_WEB1 = changes.any { it.startsWith("frontend/todo") } ? 'true' : 'true'
                 }
             }
         }
