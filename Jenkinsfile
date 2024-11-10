@@ -8,6 +8,9 @@ pipeline {
 		REMOTE_HOST = 'localhost'
 		CREDENTIALS_ID = 'hadi'
         EXCLUDE_FOLDERS = '.env,.kotlin,gradle'
+
+        JAVA_HOME = '/var/lib/jenkins/.sdkman/candidates/java/current'
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
 	}
 
 	stages {
