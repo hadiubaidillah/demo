@@ -32,7 +32,6 @@ dependencies {
     implementation(libs.ktor.server.auth.jwt)
     implementation(libs.ktor.server.auto.head.response)
     implementation(libs.ktor.server.swagger)
-    implementation(libs.ktor.server.thymeleaf)
 
     implementation(libs.ktor.client.cio)
     implementation(libs.ktor.serialization.kotlinx.json)
