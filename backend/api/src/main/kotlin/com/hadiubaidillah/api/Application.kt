@@ -1,7 +1,6 @@
 package com.hadiubaidillah.api
 
 import com.hadiubaidillah.api.plugins.configureRouting
-import com.hadiubaidillah.api.plugins.configureTemplating
 import com.hadiubaidillah.shared.plugins.configureSecurity
 import com.hadiubaidillah.shared.plugins.configureStatusPages
 import io.ktor.server.application.*
@@ -19,7 +18,6 @@ fun main() {
 
 fun Application.module() {
     configureSecurity()
-    configureTemplating()
     configureStatusPages()
     configureRouting()
 }
