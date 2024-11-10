@@ -18,13 +18,18 @@ import java.util.UUID
 fun Application.registerTaskRoutes() {
     val taskService: TaskService by inject()
     routing {
+        route("/hello") {
+            get {
+                call.respond("TODO API!")
+            }
+        }
         authenticate("auth-jwt") {
             route("/") {
                 get {
                     call.respond(taskService.getAllByAuthorId(UUID.fromString(extractAccessTokenInfo(call)!!.id)))
                 }
                 get("limit"){
-                    call.respond(makeAuthenticatedRequest("http://dev.hadiubaidillah.localhost/user/api/v1/user/attribute/me/task/limit", call.request.parseAuthorizationToken()!!).toInt())
+                    call.respond(makeAuthenticatedRequest("https://dev.hadiubaidillah.my.id/user/api/v1/user/attribute/me/task/limit", call.request.parseAuthorizationToken()!!).toInt())
                 }
                 get("{id}") {
                     val id = call.parameters["id"]

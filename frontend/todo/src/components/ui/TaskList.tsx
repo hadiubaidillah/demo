@@ -26,7 +26,7 @@ const TaskList: React.FC<TaskListProps> = (props) => {
       justifyContent={'center'}
       gap={'20px'}
     >
-      {data?.map((task, i) => (
+      {data?.map((task) => (
         <TaskCard
           key={task.id}
           item={task}

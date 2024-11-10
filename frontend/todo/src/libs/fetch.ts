@@ -2,7 +2,9 @@ import Keycloak from 'keycloak-js';
 
 export const keycloak = new Keycloak();
 
-const GATEWAY_ADDRESS = "http://dev.hadiubaidillah.localhost"
+//const GATEWAY_ADDRESS = "http://dev.hadiubaidillah.localhost"
+const GATEWAY_ADDRESS = "https://dev.hadiubaidillah.my.id"
+//const GATEWAY_ADDRESS = "http://0.0.0.0:48100"
 
 class ResponseStatusError extends Error {
   constructor(message: string/*, private status: number, private statusText?: string*/) {
@@ -11,7 +13,7 @@ class ResponseStatusError extends Error {
 }
 
 async function simplefetch(path: string, init: RequestInit) {
-  var request = fetch(`${GATEWAY_ADDRESS}${path}`, {
+  const request = fetch(`${GATEWAY_ADDRESS}${path}`, {
     ...init,
     headers: {
       ...init?.headers,
@@ -26,15 +28,15 @@ async function simplefetch(path: string, init: RequestInit) {
       return response
     }
     if (response.status === 401) {
-      throw new ResponseStatusError("User is not authenticated.", response.status, response.statusText);
+      throw new ResponseStatusError("User is not authenticated."/*, response.status, response.statusText*/);
     }
   
     const json = await response.json() as Record<string, any>
     if (!json?.message) {
-      throw new ResponseStatusError("An error occurred while making a request", response.status, response.statusText)
+      throw new ResponseStatusError("An error occurred while making a request"/*, response.status, response.statusText*/)
     }
   
-    throw new ResponseStatusError(json.message, response.status, response.statusText);
+    throw new ResponseStatusError(json.message/*, response.status, response.statusText*/);
   })
 }
 
@@ -57,7 +59,7 @@ function customRequester(init: RequestInit) {
       body: JSON.stringify(args?.arg || args)
     });
 
-    var text = await response.text()
+    const text = await response.text()
     return text.length == 0 ? undefined : JSON.parse(text) as T
   }
 
