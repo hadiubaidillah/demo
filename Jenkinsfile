@@ -18,9 +18,9 @@ pipeline {
                     def changes = sh(script: "git diff --name-only HEAD~1", returnStdout: true).trim().split("\n")
 
                     // Cek apakah ada perubahan di backend atau frontend
-                    env.BUILD_SERVICE1 = changes.any { it.startsWith("backend/api") } ? 'true' : 'false'
-                    env.BUILD_SERVICE2 = changes.any { it.startsWith("backend/notification") } ? 'true' : 'false'
-                    env.BUILD_WEB1 = changes.any { it.startsWith("frontend/todo") } ? 'true' : 'false'
+                    env.BUILD_SERVICE1 = changes.any { it.startsWith("backend/api") } ? 'true' : 'true'
+                    env.BUILD_SERVICE2 = changes.any { it.startsWith("backend/notification") } ? 'true' : 'true'
+                    env.BUILD_WEB1 = changes.any { it.startsWith("frontend/todo") } ? 'true' : 'true
                 }
             }
         }
