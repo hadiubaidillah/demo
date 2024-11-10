@@ -58,7 +58,6 @@ pipeline {
                 }
             }
         }
-    }
 		/*stage("Prepare") {
 			steps {
 				echo("Start Job : ${env.JOB_NAME}")
