@@ -32,7 +32,8 @@ pipeline {
             steps {
                 dir('backend') {
 				    sh 'pwd'
-                    sh './gradlew api:build'
+				    sh 'java -version'
+                    sh './gradlew :api:build'
                 }
             }
         }
@@ -43,7 +44,7 @@ pipeline {
             }
             steps {
                 dir('backend') {
-                    sh './gradlew notification:build'
+                    sh './gradlew :notification:build'
                 }
             }
         }
