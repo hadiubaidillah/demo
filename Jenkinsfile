@@ -31,6 +31,7 @@ pipeline {
             }
             steps {
                 dir('backend') {
+				    sh 'pwd'
                     sh './gradlew api:build'
                 }
             }
