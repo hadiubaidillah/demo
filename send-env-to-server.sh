@@ -1,0 +1,1 @@
+scp -r ./backend/.env jenkins@server:/var/lib/jenkins/workspace/hadiubaidillah.com/backend/
