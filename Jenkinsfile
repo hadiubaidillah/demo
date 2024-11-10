@@ -10,6 +10,7 @@ pipeline {
         EXCLUDE_FOLDERS = '.env,.kotlin,gradle'
 
         JAVA_HOME = '/var/lib/jenkins/.sdkman/candidates/java/current'
+        GRAALVM_HOME = '/var/lib/jenkins/.sdkman/candidates/java/current'
         PATH = "${JAVA_HOME}/bin:${env.PATH}"
 	}
 
@@ -36,7 +37,7 @@ pipeline {
                 dir('backend') {
 				    sh 'pwd'
 				    sh 'java -version'
-                    sh './gradlew :api:build'
+                    sh './gradlew :api:nativeCompile'
                 }
             }
         }
