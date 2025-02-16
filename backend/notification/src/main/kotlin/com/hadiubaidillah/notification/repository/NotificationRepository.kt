@@ -3,21 +3,16 @@ package com.hadiubaidillah.notification.repository
 import com.hadiubaidillah.notification.entity.Notification
 import com.hadiubaidillah.notification.entity.Notifications
 import com.hadiubaidillah.shared.plugins.UUIDv7
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
-import org.jetbrains.exposed.sql.update
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.and
 import java.util.UUID
 
 class NotificationRepository {
 
     private fun mapRowToModel(it: ResultRow): Notification {
         return Notification(
-            id = it[Notifications.code],
+            id = it[Notifications.id].toString(),
             authorId = it[Notifications.authorId].toString(),
             code = it[Notifications.code],
             read = it[Notifications.read],
@@ -31,20 +26,24 @@ class NotificationRepository {
     }
 
     fun findAllByAuthorId(id: UUID): List<Notification> = transaction {
-        Notifications.selectAll().where { Notifications.authorId eq id }.map { mapRowToModel(it) }
+        Notifications.selectAll().where { Notifications.authorId eq id }.orderBy( Notifications.createdAt, SortOrder.DESC ).map { mapRowToModel(it) }
     }
 
     fun findAllUnreadByAuthorId(authorId: UUID): Notification? = transaction {
         Notifications.selectAll().where {
             Notifications.read eq false
             Notifications.authorId eq authorId
-        }.map { mapRowToModel(it) }.singleOrNull()
+        }
+        .orderBy( Notifications.createdAt, SortOrder.DESC )
+        .map { mapRowToModel(it) }.singleOrNull()
     }
 
     fun findByIdAndAuthorId(id: UUID, authorId: UUID): Notification? = transaction {
+        println("findByIdAndAuthorId xxx")
+        println("authorId: $authorId")
         Notifications.selectAll().where {
-            Notifications.id eq id
-            Notifications.authorId eq authorId
+            (Notifications.id eq id) and
+            (Notifications.authorId eq authorId)
         }.map { mapRowToModel(it) }.singleOrNull()
     }
 

@@ -4,14 +4,7 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.TokenExpiredException
 import com.auth0.jwt.interfaces.DecodedJWT
-import com.hadiubaidillah.shared.plugins.Session
-import com.hadiubaidillah.shared.plugins.jwkProvider
-import com.hadiubaidillah.shared.plugins.BASE_URL
-import com.hadiubaidillah.shared.plugins.DOMAIN_URL
-import com.hadiubaidillah.shared.plugins.KEYCLOAK_ISSUER
-import com.hadiubaidillah.shared.plugins.KEYCLOAK_OPEN_ID_CONNECT_URL
-import com.hadiubaidillah.shared.plugins.KEYCLOAK_REGISTRATION_URL
-import com.hadiubaidillah.shared.plugins.PROTOCOL_URL
+import com.hadiubaidillah.shared.plugins.*
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.*
 import io.ktor.server.auth.OAuthAccessTokenResponse
@@ -104,6 +97,8 @@ fun Application.configureRouting() {
             val defaultModel =  mapOf(
                 "protocolUrl" to PROTOCOL_URL,
                 "domainUrl" to DOMAIN_URL,
+                "gatewayUrl" to GATEWAY_URL,
+                "baseUrl" to BASE_URL,
                 "login" to false
             )
             if (accessToken == null) {
@@ -126,6 +121,8 @@ fun Application.configureRouting() {
                 call.respond(ThymeleafContent("index", mapOf(
                     "protocolUrl" to PROTOCOL_URL,
                     "domainUrl" to DOMAIN_URL,
+                    "gatewayUrl" to GATEWAY_URL,
+                    "baseUrl" to BASE_URL,
                     "login" to true,
                     "name" to decodedJWT.getClaim("name").asString(),
                     "email" to decodedJWT.getClaim("email").asString(),

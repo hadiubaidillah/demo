@@ -3,7 +3,9 @@ package com.hadiubaidillah.shared.plugins
 val PROTOCOL_URL: String = System.getenv("PROTOCOL_URL")
 val DOMAIN_URL: String = System.getenv("DOMAIN_URL")
 val SUB_DOMAIN_URL: String = System.getenv("SUB_DOMAIN_URL")
+val GATEWAY_SUB_DOMAIN_URL: String = System.getenv("GATEWAY_SUB_DOMAIN_URL")
 val BASE_URL: String = "${PROTOCOL_URL}://${SUB_DOMAIN_URL}.${DOMAIN_URL}"
+val GATEWAY_URL: String = "${PROTOCOL_URL}://${GATEWAY_SUB_DOMAIN_URL}.${DOMAIN_URL}"
 
 //val PORTAL_SUB_DOMAIN_URL: String = System.getenv("PORTAL_SUB_DOMAIN_URL")
 //val PORTAL_URL: String = "${PROTOCOL_URL}://${PORTAL_SUB_DOMAIN_URL}.${DOMAIN_URL}"

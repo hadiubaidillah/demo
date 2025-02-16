@@ -1,7 +1,8 @@
-import { Spinner, Text, Tooltip } from '@chakra-ui/react';
+import {HStack, Spinner, Tooltip} from '@chakra-ui/react';
 import { Duration } from 'dayjs/plugin/duration'
 import dayjs from 'dayjs'
 import { useEffect, useRef } from 'react';
+import React from 'react';
 
 interface RegressiveCountProps {
   ends: Date;
@@ -44,7 +45,9 @@ const RegressiveCount: React.FC<RegressiveCountProps> = (props) => {
 
   return (
     <Tooltip label={<TooltipLabel ends={props.ends} duration={duration}/>}>
-      <Text fontFamily={'Teko'} ref={ref}><Spinner size={'xs'}/></Text>
+      <HStack style={{ fontFamily: 'Teko' }} ref={ref}>
+        <Spinner size={'xs'} />
+      </HStack>
     </Tooltip>
   );
 }

@@ -11,8 +11,8 @@ import UserProfile from './UserProfile';
 
 interface HeaderProps {
   fetcher(value: '/notification'): Promise<Notification[]>;
-  putter(value: '/notifications/unreads'
-    | `/notifications/unreads/${string}`): Promise<unknown>;
+  putter(value: '/notification/unreads'
+    | `/notification/unreads/${string}`): Promise<unknown>;
 }
 
 const Header: React.FC<HeaderProps> = (props) => {

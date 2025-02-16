@@ -23,7 +23,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form';
 
 interface CreateTaskModalProps extends Omit<ModalProps, 'children'> {
-  poster(path: '/task', args: { arg: any }): any;
+  poster(path: '/todo', args: { arg: any }): any;
 }
 
 const getSchema = () => yup.object({
@@ -41,7 +41,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ poster, ...modalProps
   const { handleSubmit, register, formState: { errors } } = useForm<any>({
     resolver: yupResolver(getSchema())
   });
-  const { trigger, reset, isMutating } = useMutation('/task', poster);
+  const { trigger, reset, isMutating } = useMutation('/todo', poster);
 
   const onSubmit = (e: any) => {
     e.ends_in = dayjs(e.ends_in).valueOf()

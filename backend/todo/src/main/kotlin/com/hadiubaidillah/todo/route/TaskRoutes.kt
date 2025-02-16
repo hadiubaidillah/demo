@@ -45,6 +45,7 @@ fun Application.registerTaskRoutes() {
                     }
                 }
                 post {
+                    println("Task POST request")
                     val task = call.receive<Task>()
                     val timeZone = ZoneId.of(call.request.headers["Time-Zone"] ?: System.getenv("DEFAULT_TIME_ZONE"))
                     val accessTokenInfo = extractAccessTokenInfo(call)

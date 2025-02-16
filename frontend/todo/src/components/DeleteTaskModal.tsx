@@ -16,7 +16,7 @@ import useMutation from 'swr/mutation';
 import { useSWRConfig } from 'swr';
 
 interface DeleteTaskModalProps extends Omit<ModalProps, 'children' | 'isOpen' | 'onClose'> {
-  deleter(path: `/task/${string}`): Promise<unknown>
+  deleter(path: `/todo/${string}`): Promise<unknown>
 }
 
 export interface DeleteTaskHandler {
@@ -28,7 +28,7 @@ const DeleteTaskModal = React.forwardRef<DeleteTaskHandler, DeleteTaskModalProps
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [isLoading, { on, off }] = useBoolean();
   
-  const { trigger } = useMutation(`/task/${id}`, props.deleter);
+  const { trigger } = useMutation(`/todo/${id}`, props.deleter);
   const { mutate } = useSWRConfig();
 
   useImperativeHandle(ref, () => ({
@@ -59,7 +59,7 @@ const DeleteTaskModal = React.forwardRef<DeleteTaskHandler, DeleteTaskModalProps
               trigger().finally(() => {                
                 off();
                 mutate('/notification');
-                mutate('/task').finally(onClose);
+                mutate('/todo').finally(onClose);
               });
             }}
           >

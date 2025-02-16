@@ -3,7 +3,9 @@ import Keycloak from 'keycloak-js';
 export const keycloak = new Keycloak();
 
 //const GATEWAY_ADDRESS = "http://dev.hadiubaidillah.localhost"
-const GATEWAY_ADDRESS = "https://dev.hadiubaidillah.my.id"
+//const GATEWAY_ADDRESS = "https://dev.hadiubaidillah.my.id"
+//const GATEWAY_ADDRESS = "https://gateway.hadiubaidillah.my.id"
+const GATEWAY_ADDRESS = "http://www.hadiubaidillah.local/api"
 //const GATEWAY_ADDRESS = "http://0.0.0.0:48100"
 
 class ResponseStatusError extends Error {

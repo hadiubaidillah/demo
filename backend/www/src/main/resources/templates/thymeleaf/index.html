@@ -86,8 +86,8 @@
           <li><a class="" href="/logout" title="Logout">Logout <i class="fa fa-sign-out"></i></a></li>
         </ul>
         <ul th:if="${login==false}" class="site-main-menu account">
-          <li><a class="" href="/login" title="Login">Login</a></li>
-          <li><a class="" href="/register" title="Register">Register</a></li>
+          <li><a class="" href="login" title="Login">Login</a></li>
+          <li><a class="" href="register" title="Register">Register</a></li>
         </ul>
       </div>
       <!-- Navigation & Social buttons -->
@@ -762,6 +762,19 @@
 
             <div class="row">
               <div class="col-lg-3 col-sm-6 text-center mb-4">
+                <a class="hover" target="_blank" th:href="${baseUrl+'/todo'}">
+                  <img class="rounded-circle responsive-img img-fluid d-block mx-auto" src="images/demo/todo.svg" alt="To-Do List">
+                  <h3>To-Do List</h3>
+                </a>
+                <p class="desk">
+                  <a class="hover" target="_blank" th:href="${gatewayUrl+'/todo'}">Your goals, simplified.</a><br/>
+                  <a target="_blank" href="https://java.com/">#java</a>
+                  <a target="_blank" href="https://spring.io/">#spring</a>
+                  <a target="_blank" href="https://elastic.co/">#elasticsearch</a>
+                  <a target="_blank" href="https://react.dev/">#reactjs</a>
+                </p>
+              </div>
+              <div class="col-lg-3 col-sm-6 text-center mb-4">
                 <a class="hover" target="_blank" th:href="${protocolUrl+'://pos.'+domainUrl}">
                   <img class="rounded-circle responsive-img img-fluid d-block mx-auto" src="images/demo/pos-gradient.jpg" alt="Point of Sales">
                   <h3>Point of Sales</h3>
@@ -790,33 +803,20 @@
 <!--                  <a target="_blank" href="https://vuejs.org/">#vuejs</a>-->
 <!--                </p>-->
 <!--              </div>-->
-              <div class="col-lg-3 col-sm-6 text-center mb-4">
-                <a class="hover" target="_blank" th:href="${protocolUrl+'://todo.'+domainUrl}">
-                  <img class="rounded-circle responsive-img img-fluid d-block mx-auto" src="images/demo/todo.png" alt="To-Do List">
-                  <h3>To-Do List</h3>
-                </a>
-                <p class="desk">
-                  <a class="hover" target="_blank" th:href="${protocolUrl+'://todo-service.'+domainUrl}">Your goals, simplified.</a><br/>
-                  <a target="_blank" href="https://java.com/">#java</a>
-                  <a target="_blank" href="https://spring.io/">#spring</a>
-                  <a target="_blank" href="https://elastic.co/">#elasticsearch</a>
-                  <a target="_blank" href="https://react.dev/">#reactjs</a>
-                </p>
-              </div>
-              <div class="col-lg-3 col-sm-6 text-center mb-4">
-                <a class="hover" target="_blank" th:href="${protocolUrl+'://url.'+domainUrl}">
-                  <img class="rounded-circle responsive-img img-fluid d-block mx-auto" src="images/demo/url.png" alt="Election">
-                  <h3>URL Shortener</h3>
-                </a>
-                <p class="desk">
-                  <a class="hover" target="_blank" th:href="${protocolUrl+'://url-service.'+domainUrl}">URL too long? Shorten here!</a><br/>
-                  <a target="_blank" href="https://go.dev/">#go</a>
-                  <a target="_blank" href="https://go.dev/">#golang</a>
-                  <a target="_blank" href="https://gin-gonic.com/">#gin</a>
-                  <a target="_blank" href="https://elastic.co/">#elasticsearch</a>
-                  <a target="_blank" href="https://vuejs.org/">#vuejs</a>
-                </p>
-              </div>
+<!--              <div class="col-lg-3 col-sm-6 text-center mb-4">-->
+<!--                <a class="hover" target="_blank" th:href="${protocolUrl+'://url.'+domainUrl}">-->
+<!--                  <img class="rounded-circle responsive-img img-fluid d-block mx-auto" src="images/demo/url.png" alt="Election">-->
+<!--                  <h3>URL Shortener</h3>-->
+<!--                </a>-->
+<!--                <p class="desk">-->
+<!--                  <a class="hover" target="_blank" th:href="${protocolUrl+'://url-service.'+domainUrl}">URL too long? Shorten here!</a><br/>-->
+<!--                  <a target="_blank" href="https://go.dev/">#go</a>-->
+<!--                  <a target="_blank" href="https://go.dev/">#golang</a>-->
+<!--                  <a target="_blank" href="https://gin-gonic.com/">#gin</a>-->
+<!--                  <a target="_blank" href="https://elastic.co/">#elasticsearch</a>-->
+<!--                  <a target="_blank" href="https://vuejs.org/">#vuejs</a>-->
+<!--                </p>-->
+<!--              </div>-->
 <!--              <div class="col-lg-3 col-sm-6 text-center mb-4">-->
 <!--                <a class="hover" target="_blank" href="https://vote.hadiubaidillah.com">-->
 <!--                  <img class="rounded-circle responsive-img img-fluid d-block mx-auto" src="images/demo/election.png" alt="Election">-->
@@ -833,8 +833,21 @@
 <!--                </p>-->
 <!--              </div>-->
               <div class="col-lg-3 col-sm-6 text-center mb-4">
+                <a class="hover" target="_blank" href="https://keycloak.hadiubaidillah.com/realms/hadi/account/">
+                  <img class="rounded-circle responsive-img img-fluid d-block mx-auto" src="https://www.svgrepo.com/show/343494/profile-user-account.svg" alt="User Profile">
+                  <h3>My Profile</h3>
+                </a>
+                <p class="desk">
+                  Update your Personal Info.<br/>
+                  <a target="_blank" href="https://keycloak.org/">#keycloak</a>
+                  <a target="_blank" href="https://java.com/">#java</a>
+                  <a target="_blank" href="https://quarkus.io/">#quarkus</a>
+                  <a target="_blank" href="https://react.dev/">#react</a>
+                </p>
+              </div>
+              <div class="col-lg-3 col-sm-6 text-center mb-4">
                 <a class="hover" target="_blank" th:href="${protocolUrl+'://user.'+domainUrl}">
-                  <img class="rounded-circle responsive-img img-fluid d-block mx-auto" src="https://simawas.itjen.menlhk.go.id/resources/mawas.png" alt="To-Do List">
+                  <img class="rounded-circle responsive-img img-fluid d-block mx-auto" src="images/demo/mawas.png" alt="User Management">
                   <h3>User Management</h3>
                 </a>
                 <p class="desk">
@@ -895,6 +908,65 @@
                 </a>
                 <p class="desk">Open-source simplify API development, efficiently design and document APIs at scale.</p>
               </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-sm-6 text-center" style="margin-bottom: 20px">
+                <!--
+                  1. Logo Only:
+                  2. Logo and Text:
+                -->
+                <a class="hover" target="_blank" href="https://kafka-ui.hadiubaidillah.com">
+                  <img class="responsive-img img-fluid d-block mx-auto" src="https://www.svgrepo.com/show/353950/kafka.svg" alt="Apache Kafka" style="width:100%">
+                  <h3>Apache Kafka</h3>
+                </a>
+                <p class="desk">Open-source platform for real-time data streaming and processing.</p>
+              </div>
+              <div class="col-lg-3 col-sm-6 text-center" style="margin-bottom: 20px">
+                <!--
+                  1. Logo Only:
+                  2. Logo and Text:
+                -->
+                <a class="hover" target="_blank" href="https://rabbitmq.hadiubaidillah.com">
+                  <img class="responsive-img img-fluid d-block mx-auto" src="https://www.svgrepo.com/show/354248/rabbitmq.svg" alt="RabbitMQ" style="width:100%">
+                  <h3>RabbitMQ</h3>
+                </a>
+                <p class="desk">Open-source message broker for reliable application communication.</p>
+              </div>
+              <div class="col-lg-3 col-sm-6 text-center" style="margin-bottom: 20px">
+                <!--
+                  1. Logo Only:
+                  2. Logo and Text:
+                -->
+                <a class="hover" target="_blank" href="https://sonarqube.hadiubaidillah.com">
+                  <img class="responsive-img img-fluid d-block mx-auto" src="https://www.svgrepo.com/show/354365/sonarqube.svg" alt="SonarQube" style="width:100%">
+                  <h3>SonarQube</h3>
+                </a>
+                <p class="desk">Open-source tool for continuous code quality analysis, detecting bugs and vulnerabilities.</p>
+              </div>
+              <div class="col-lg-3 col-sm-6 text-center" style="margin-bottom: 20px">
+                <!--
+                  1. Logo Only: https://www.svgrepo.com/show/303460/redis-logo.svg
+                  2. Logo and Text:
+                -->
+                <a class="hover" target="_blank" href="https://redis-commander.hadiubaidillah.com">
+                  <img class="responsive-img img-fluid d-block mx-auto" src="https://www.svgrepo.com/show/303460/redis-logo.svg" alt="Redis">
+                  <h3>Redis</h3>
+                </a>
+                <p class="desk">Open-source, in-memory data store used for caching and messaging.</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-sm-6 text-center" style="margin-bottom: 20px">
+                <!--
+                  1. Logo Only: images/demo/elasticsearch.svg
+                  2. Logo and Text:
+                -->
+                <a class="hover" target="_blank" href="https://elasticsearch.hadiubaidillah.com">
+                  <img class="responsive-img img-fluid d-block mx-auto" src="images/demo/elasticsearch.svg" alt="Elasticsearch">
+                  <h3>Elasticsearch</h3>
+                </a>
+                <p class="desk">Open-source search and analytics engine for fast, scalable full-text search and data analysis.</p>
+              </div>
               <div class="col-lg-3 col-sm-6 text-center" style="margin-bottom: 20px">
                 <!--
                   1. Logo Only:
@@ -911,8 +983,8 @@
                   1. Logo Only:
                   2. Logo and Text:
                 -->
-                <a class="hover" target="_blank" href="https://postgresql.hadiubaidillah.com">
-                  <img class="responsive-img img-fluid d-block mx-auto" src="images/demo/postgresql.svg" alt="phpMyAdmin">
+                <a class="hover" target="_blank" href="https://pgadmin4.hadiubaidillah.com">
+                  <img class="responsive-img img-fluid d-block mx-auto" src="images/demo/postgresql.svg" alt="PostgreSQL">
                   <h3>PostgreSQL</h3>
                 </a>
                 <p class="desk">Open-source, object-relational database, powerful, reliable, feature-rich.</p>
@@ -928,6 +1000,8 @@
                 </a>
                 <p class="desk">Open Source service mesh layers transparently onto existing distributed applications.</p>
               </div>
+            </div>
+            <div class="row">
               <div class="col-lg-3 col-sm-6 text-center" style="margin-bottom: 20px">
                 <!--
                   1. Logo Only: https://www.svgrepo.com/show/303615/github-icon-1-logo.svg
@@ -939,8 +1013,6 @@
                 </a>
                 <p class="desk">Version control, issue tracking, code review, and project management tools.</p>
               </div>
-            </div>
-            <div class="row">
               <div class="col-lg-3 col-sm-6 text-center" style="margin-bottom: 20px">
                 <!--
                   1. Logo Only:
@@ -974,6 +1046,8 @@
                 </a>
                 <p class="desk">Open-source analytics & monitoring solution for every database.</p>
               </div>
+            </div>
+            <div class="row">
               <div class="col-lg-3 col-sm-6 text-center" style="margin-bottom: 20px">
                 <!--
                   1. Logo Only:
@@ -985,8 +1059,6 @@
                 </a>
                 <p class="desk">Open-source log aggregation system. Stores and queries logs.</p>
               </div>
-            </div>
-            <div class="row">
               <div class="col-lg-3 col-sm-6 text-center" style="margin-bottom: 20px">
                 <!--
                   1. Logo Only: https://grafana.com/static/assets/img/logos/grafana-tempo.svg

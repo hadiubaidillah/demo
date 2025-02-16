@@ -17,19 +17,19 @@ import NotificationsList from './NotificationsList';
 
 interface NotificationsProps {
   fetcher(value: '/notification'): Promise<Notification[]>;
-  putter(value: '/notifications/unreads' 
-    | `/notifications/unreads/${string}`): Promise<unknown>;
+  putter(value: '/notification/unreads'
+    | `/notification/unreads/${string}`): Promise<unknown>;
 }
 
 function useNotifications(enable: boolean, fetcher: NotificationsProps['fetcher'], putter: NotificationsProps['putter']) {
   const { data, isLoading, isValidating, mutate } = useSWR(enable ? '/notification' : null, fetcher);
-  const { trigger, isMutating } = useMutation('/notifications/unreads', putter);
+  const { trigger, isMutating } = useMutation('/notification/unreads', putter);
   const unreads = useMemo(() => {
-    return (data || []).filter((item) => !item.readed)
+    return (data || []).filter((item) => !item.read)
   }, [data]);
 
   const readAll = useCallback(() => {
-    trigger().then(() => mutate(data!!.map(i => ({...i, readed: true}))));
+    trigger().then(() => mutate(data!!.map(i => ({...i, read: true}))));
   }, [data, trigger, mutate])
 
   return {

@@ -7,14 +7,14 @@ import TaskCard, { Task } from './TaskCard';
 import DeleteTaskModal, { DeleteTaskHandler } from '../DeleteTaskModal';
 
 interface TaskListProps {
-  fetcher(path: '/task'): Promise<Task[]>;
-  deleter(path: `/task/${string}`): Promise<unknown>;
+  fetcher(path: '/todo'): Promise<Task[]>;
+  deleter(path: `/todo/${string}`): Promise<unknown>;
 }
 
 const TaskList: React.FC<TaskListProps> = (props) => {
   const { keycloak: { authenticated } } = useKeycloak();
   const deleteRef = useRef<DeleteTaskHandler>(null);
-  const { data } = useSWR(authenticated ? '/task' : null, props.fetcher, {
+  const { data } = useSWR(authenticated ? '/todo' : null, props.fetcher, {
     suspense: true,
   });
 

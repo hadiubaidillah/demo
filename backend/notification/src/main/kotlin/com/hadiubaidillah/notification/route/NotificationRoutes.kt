@@ -1,13 +1,17 @@
 package com.hadiubaidillah.notification.route
 
+import com.hadiubaidillah.notification.entity.Notification
 import com.hadiubaidillah.notification.service.NotificationService
+import com.hadiubaidillah.shared.extractAccessTokenInfo
 import com.hadiubaidillah.shared.getUserId
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.*
 import io.ktor.server.auth.authenticate
+import io.ktor.server.request.*
 import io.ktor.server.routing.*
 import io.ktor.server.response.*
 import org.koin.ktor.ext.inject
+import java.time.ZoneId
 import java.util.UUID
 
 fun Application.registerNotificationRoutes() {
@@ -105,7 +109,9 @@ fun Application.registerNotificationRoutes() {
                         call.respond(HttpStatusCode.BadRequest, "Missing or malformed id")
                         return@put
                     }
-                    val notification = notificationService.markAsRead(getUserId(call), UUID.fromString(id))
+                    println("UUID.fromString(id): ${UUID.fromString(id)}")
+                    println("getUserId(call): ${getUserId(call)}")
+                    val notification = notificationService.markAsRead(UUID.fromString(id), getUserId(call))
                     call.respond(notification)
                 }
             }

@@ -36,11 +36,11 @@ fun Application.configureRouting() {
         }
         // Define proxy routes for each service
         mapOf(
-            "/notification" to "http://localhost:40082",
-            "/user" to "http://localhost:40084",
-            "/pos" to "http://localhost:40085",
-            "/task" to "http://localhost:40086",
-            "/url" to "http://localhost:40087"
+            "/notification" to "http://localhost:30082",
+            "/user" to "http://localhost:30084",
+            "/pos" to "http://localhost:30085",
+            "/task" to "http://localhost:30086",
+            "/url" to "http://localhost:30087"
         ).forEach { (routePath, targetUrl) ->
             route("$routePath/{...}") {
                 handle {

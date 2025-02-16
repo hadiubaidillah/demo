@@ -23,7 +23,7 @@ fun main() {
 
     // Kirim pesan ke RabbitMQ
     val factory = ConnectionFactory().apply {
-        host = "ubuntu" // sesuaikan dengan konfigurasi RabbitMQ
+        host = "node0" // sesuaikan dengan konfigurasi RabbitMQ
         port = 5672
     }
     val connection = factory.newConnection()

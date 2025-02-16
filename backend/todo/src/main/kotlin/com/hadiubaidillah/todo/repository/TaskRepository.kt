@@ -27,7 +27,7 @@ class TaskRepository {
     }
 
     fun getAllByAuthorId(authorId: UUID): List<Task> = transaction {
-        Tasks.selectAll().where { Tasks.authorId eq authorId }.map { mapRowToTask(it) }
+        Tasks.selectAll().where { Tasks.authorId eq authorId }.orderBy( Tasks.endsIn, SortOrder.DESC ).map { mapRowToTask(it) }
     }
 
     fun getById(id: UUID): Task? = transaction {

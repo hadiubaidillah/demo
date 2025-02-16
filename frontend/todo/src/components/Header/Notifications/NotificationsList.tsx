@@ -3,7 +3,7 @@ import NotificationCard, { Notification } from '../NotificationCard';
 
 interface NotificationsListProps {
   data?: Notification[];
-  putter(value: `/notifications/unreads/${string}`): Promise<unknown>;
+  putter(value: `/notification/unreads/${string}`): Promise<unknown>;
   isLoading: boolean;
 }
 

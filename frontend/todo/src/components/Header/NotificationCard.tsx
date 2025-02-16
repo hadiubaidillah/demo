@@ -5,31 +5,31 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import dayjs from 'dayjs';
 import useMutation from 'swr/mutation'
 
-import { Task } from '../ui/TaskCard';
 import { useSWRConfig } from 'swr';
 
 interface NotificationCardProps {
   item: Notification;
-  putter(value: `/notifications/unreads/${string}`): Promise<unknown>;
+  putter(value: `/notification/unreads/${string}`): Promise<unknown>;
 }
 
 
 export type Notification = {
   created_at: string;
   id: string;
-  readed: boolean;
+  read: boolean;
   sent: boolean;
-  task: Task;
-  type: 'CREATION' | 'DELETION' |'FINISHED';
+  parameters: [];
+  name: string;
+  code: 'tasks_created' | 'tasks_deleted' |'tasks_finished';
 };
 
 const NotificationCard: React.FC<NotificationCardProps> = ({ item, putter }) => {
-  const { trigger } = useMutation(`/notifications/unreads/${item.id}`, putter);
+  const { trigger } = useMutation(`/notification/unreads/${item.id}`, putter);
   const { mutate } = useSWRConfig();
   const date = useMemo(() => dayjs(item.created_at), [item.created_at])
 
   return (
-    <VStack as={'li'} p={2} bg={item.readed ? 'gray.100' : 'yellow.100'} alignItems={'stretch'} rounded={6}>
+    <VStack as={'li'} p={2} bg={item.read ? 'gray.100' : 'yellow.100'} alignItems={'stretch'} rounded={6}>
       <HStack alignItems={'flex-start'}>
         <Heading
           flex={1}
@@ -38,16 +38,17 @@ const NotificationCard: React.FC<NotificationCardProps> = ({ item, putter }) => 
           fontWeight={500}
           size={'sm'}
         >
-          {message(item.type) + '\n'}
-          <Text fontFamily={'Barlow'}>{item.task.name}</Text>
+          {message(item.code) + '\n'}
+          <Text fontFamily={'Barlow'}>{item.parameters.filter(item => item['key'] === 'name')
+              .map(item => item['value'])}</Text>
         </Heading>
-        <Tooltip isDisabled={item.readed} hasArrow label={'Mark as read'}>
+        <Tooltip isDisabled={item.read} hasArrow label={'Mark as read'}>
           <IconButton 
             _hover={{ color: 'green' }}
             color={'gray'}
             aria-label='Mark as read'
             colorScheme={'unstyled'}
-            isDisabled={item.readed}
+            isDisabled={item.read}
             icon={<FontAwesomeIcon color={'inherit'} fontSize={16} icon={faCheckDouble} />}
             p={1}
             size={'xs'}
@@ -82,13 +83,13 @@ const NotificationCard: React.FC<NotificationCardProps> = ({ item, putter }) => 
   );
 };
 
-function message(type: Notification['type']) {
+function message(type: Notification['code']) {
   switch (type) {
-    case 'CREATION':
+    case 'tasks_created':
       return 'Task created';
-    case 'DELETION':
+    case 'tasks_deleted':
       return 'Task has been deleted';
-    case 'FINISHED':
+    case 'tasks_finished':
       return 'A task has been completed';
   }
 }

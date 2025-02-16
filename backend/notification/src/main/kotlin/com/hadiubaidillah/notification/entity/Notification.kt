@@ -1,5 +1,6 @@
 package com.hadiubaidillah.notification.entity
 
+import com.hadiubaidillah.shared.model.EmailRequest
 import com.hadiubaidillah.shared.model.Recipient
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -15,7 +16,7 @@ object Notifications : Table("tbl_notifications") {
     val to = json<List<Recipient>>("to", Json)
     val cc = json<List<Recipient>>("cc", Json)
     val bcc = json<List<Recipient>>("bcc", Json)
-    val parameters = json<String>("parameters", Json)
+    val parameters = json<List<Parameter>>("parameters", Json)
     val createdAt = long("created_at")
 
     override val primaryKey = PrimaryKey(id)
@@ -31,6 +32,33 @@ data class Notification(
     val to: List<Recipient>,
     val cc: List<Recipient>,
     val bcc: List<Recipient>,
-    val parameters: String? = null,
-    var createdAt: Long? = null,
+    val parameters: List<Parameter>,
+    var createdAt: Long? = null
 )
+
+@Serializable
+data class Parameter(val key: String, val value: String)
+
+fun convertMapToList(map: Map<String, String>): List<Parameter> {
+    return map.map { (key, value) ->
+        // Assuming the key is the email and the value is the name
+        Parameter(key, value)
+    }
+}
+
+// Extension function to convert EmailRequest to Notification
+fun EmailRequest.toNotification(): Notification {
+
+    return Notification(
+        id = null, // Default value for id
+        authorId = this.authorId,
+        code = this.code,
+        read = false, // Default value for read
+        sent = false, // Default value for sent
+        to = this.to,
+        cc = this.cc ?: emptyList(), // Nullable, will be null if not provided
+        bcc = this.bcc ?: emptyList(), // Nullable, will be null if not provided
+        //subject = this.subject, // Nullable, will be null if not provided
+        parameters = convertMapToList(this.parameters!!)
+    )
+}

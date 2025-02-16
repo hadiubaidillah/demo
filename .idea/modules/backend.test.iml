@@ -2,7 +2,7 @@
 <module external.linked.project.id="backend:test" external.linked.project.path="$MODULE_DIR$/../../backend" external.root.project.path="$MODULE_DIR$/../../backend" external.system.id="GRADLE" external.system.module.group="com.hadiubaidillah" external.system.module.type="sourceSet" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet external-system-id="GRADLE" type="kotlin-language" name="Kotlin">
-      <configuration version="5" platform="JVM 21" allPlatforms="JVM [21]" useProjectSettings="false" pureKotlinSourceFolders="$MODULE_DIR$/../../backend/src/test/kotlin;/Users/hadi/workspace/hadi/hadiubaidillah-R4/backend/src/main/kotlin">
+      <configuration version="5" platform="JVM 21" allPlatforms="JVM [21]" useProjectSettings="false" pureKotlinSourceFolders="$MODULE_DIR$/../../backend/src/test/kotlin;/Users/hadi/workspace/hadi/hadiubaidillah-R4x/backend/src/main/kotlin">
         <additionalVisibleModuleNames>backend:main</additionalVisibleModuleNames>
         <compilerSettings />
         <compilerArguments>
@@ -41,7 +41,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../backend/src/test/kotlin" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../backend/src/test/resources" type="java-test-resource" />
     </content>
-    <orderEntry type="jdk" jdkName="21" jdkType="JavaSDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="backend.main" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-test:2.0.20" level="project" />

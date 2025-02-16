@@ -38,7 +38,7 @@ fun Application.configureSecurity() {
             cookie.domain = ".${DOMAIN_URL}"
             cookie.maxAge = 1.days
             cookie.httpOnly = true     // Opsional, untuk keamanan, pilih false jika ingin diakses lewat javascript juga
-            cookie.secure = true       // Opsional, gunakan jika Anda menggunakan HTTPS, pilih false jika Anda menggunakan HTTP
+            cookie.secure = false       // Opsional, true jika Anda menggunakan HTTPS, pilih false jika Anda menggunakan HTTP
             cookie.sameSite = SameSite.Lax // Default
             /*
             SameSite.None: Use when you need to share cookies across domains but ensure to set Secure.
@@ -50,6 +50,8 @@ fun Application.configureSecurity() {
 
     install(CORS) {
         anyHost()
+        allowHost("www.hadiubaidillah.local", schemes = listOf("http"))
+        allowCredentials = true
         allowHeader(HttpHeaders.ContentType)
         allowHeader(HttpHeaders.Authorization)
         allowMethod(HttpMethod.Options)

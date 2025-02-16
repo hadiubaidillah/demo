@@ -1,5 +1,3 @@
-
-
 plugins {
     id("org.jetbrains.kotlin.plugin.serialization") version "2.0.21"
     id("org.graalvm.buildtools.native") version "0.10.3"
@@ -49,15 +47,11 @@ graalvmNative {
             fallback.set(false)
             verbose.set(true)
 
-            buildArgs.add("--initialize-at-build-time=ch.qos.logback")
-            buildArgs.add("--initialize-at-build-time=io.ktor,kotlin")
-            buildArgs.add("--initialize-at-build-time=org.slf4j.LoggerFactory")
-
             buildArgs.add("-H:+InstallExitHandlers")
             buildArgs.add("-H:+ReportUnsupportedElementsAtRuntime")
             buildArgs.add("-H:+ReportExceptionStackTraces")
 
-            imageName.set("graalvm-server")
+            imageName.set("api-service")
         }
 
         named("test"){
@@ -66,7 +60,6 @@ graalvmNative {
 
             buildArgs.add("--initialize-at-build-time=ch.qos.logback")
             buildArgs.add("--initialize-at-build-time=io.ktor,kotlin")
-            buildArgs.add("--initialize-at-build-time=org.slf4j.LoggerFactory")
 
             buildArgs.add("-H:+InstallExitHandlers")
             buildArgs.add("-H:+ReportUnsupportedElementsAtRuntime")
@@ -76,7 +69,7 @@ graalvmNative {
             buildArgs.add("-H:ReflectionConfigurationFiles=${path}reflect-config.json")
             buildArgs.add("-H:ResourceConfigurationFiles=${path}resource-config.json")
 
-            imageName.set("graalvm-test-server")
+            imageName.set("api-test-service")
         }
     }
 

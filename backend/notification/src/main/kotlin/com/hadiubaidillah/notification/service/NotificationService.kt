@@ -1,6 +1,7 @@
 package com.hadiubaidillah.notification.service
 
 import com.hadiubaidillah.notification.entity.Notification
+import com.hadiubaidillah.notification.entity.toNotification
 import com.hadiubaidillah.notification.repository.NotificationRepository
 import com.hadiubaidillah.notification.repository.TemplateRepository
 import com.hadiubaidillah.shared.model.EmailRequest
@@ -84,6 +85,8 @@ class NotificationService(
         message.setFrom(InternetAddress(email, personal))
         message.subject = emailRequest.subject
         message.setContent(html, "text/html")
+
+        notificationRepository.add(emailRequest.toNotification())
 
         Transport.send(message)
     }
