@@ -15,6 +15,16 @@ pipeline {
 	}
 
 	stages {
+
+        stage('Check Environment') {
+            steps {
+                sh 'pwd'
+                sh 'whoami'
+                sh 'java -version'
+                sh './gradlew :api:nativeCompile'
+            }
+        }
+
         stage('Detect Changes') {
             steps {
                 script {
