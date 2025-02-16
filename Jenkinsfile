@@ -102,7 +102,8 @@ pipeline {
 
 	post {
 		always {
-			echo "I will always say Hello again!! $USER"
+		    def currentUser = sh(script: 'whoami', returnStdout: true).trim()
+			echo "I will always say Hello again!! ${currentUser}"
 		}
 		success {
 			echo "Yay, success"
