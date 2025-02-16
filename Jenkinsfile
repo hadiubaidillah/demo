@@ -19,64 +19,10 @@ pipeline {
         stage('Check Environment') {
             steps {
                 script {
-                    // Get the current user
-                    def currentUser = sh(script: 'whoami', returnStdout: true).trim()
-                    // Print the current user
-                    echo "Currently running user: ${currentUser}"
                     sh 'pwd'
                     sh 'whoami'
                     sh 'java -version'
                     sh './gradlew :api:nativeCompile'
-                }
-            }
-        }
-
-        stage('Detect Changes') {
-            steps {
-                script {
-                    // Mendapatkan daftar file yang berubah
-                    def changes = sh(script: "git diff --name-only HEAD~1", returnStdout: true).trim().split("\n")
-
-                    // Cek apakah ada perubahan di backend atau frontend
-                    env.BUILD_SERVICE1 = changes.any { it.startsWith("backend/api") } ? 'true' : 'true'
-                    env.BUILD_SERVICE2 = changes.any { it.startsWith("backend/notification") } ? 'true' : 'true'
-                    env.BUILD_WEB1 = changes.any { it.startsWith("frontend/todo") } ? 'true' : 'true'
-                }
-            }
-        }
-
-        stage('Build Backend Service 1') {
-            when {
-                expression { env.BUILD_SERVICE1 == 'true' }
-            }
-            steps {
-                dir('backend') {
-				    sh 'pwd'
-				    sh 'java -version'
-                    sh './gradlew :api:nativeCompile'
-                }
-            }
-        }
-
-        stage('Build Backend Service 2') {
-            when {
-                expression { env.BUILD_SERVICE2 == 'true' }
-            }
-            steps {
-                dir('backend') {
-                    sh './gradlew :notification:build'
-                }
-            }
-        }
-
-        stage('Build Frontend Web1') {
-            when {
-                expression { env.BUILD_WEB1 == 'true' }
-            }
-            steps {
-                dir('frontend/todo') {
-                    sh 'npm install'
-                    sh 'npm run build'
                 }
             }
         }
