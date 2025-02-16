@@ -18,10 +18,16 @@ pipeline {
 
         stage('Check Environment') {
             steps {
-                sh 'pwd'
-                sh 'whoami'
-                sh 'java -version'
-                sh './gradlew :api:nativeCompile'
+                script {
+                    // Get the current user
+                    def currentUser = sh(script: 'whoami', returnStdout: true).trim()
+                    // Print the current user
+                    echo "Currently running user: ${currentUser}"
+                    sh 'pwd'
+                    sh 'whoami'
+                    sh 'java -version'
+                    sh './gradlew :api:nativeCompile'
+                }
             }
         }
 
@@ -102,8 +108,7 @@ pipeline {
 
 	post {
 		always {
-		    def currentUser = sh(script: 'whoami', returnStdout: true).trim()
-			echo "I will always say Hello again!! ${currentUser}"
+			echo "I will always say Hello again!"
 		}
 		success {
 			echo "Yay, success"
