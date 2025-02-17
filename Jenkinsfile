@@ -22,6 +22,8 @@ pipeline {
                     sh 'pwd'
                     sh 'whoami'
                     sh 'java -version'
+                    sh 'which npm'
+                    sh 'npm -v'
                 }
             }
         }
@@ -70,7 +72,6 @@ pipeline {
             }
             steps {
                 dir('frontend/todo') {
-                    sh 'which npm'
                     sh 'npm install'
                     sh 'npm run build'
                 }
