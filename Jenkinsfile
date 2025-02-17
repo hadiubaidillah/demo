@@ -22,7 +22,6 @@ pipeline {
                     sh 'pwd'
                     sh 'whoami'
                     sh 'java -version'
-                    sh 'which npm'
                     sh 'npm -v'
                 }
             }
