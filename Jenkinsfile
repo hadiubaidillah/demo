@@ -22,6 +22,8 @@ pipeline {
                     sh 'pwd'
                     sh 'whoami'
                     sh 'java -version'
+                    sh 'echo $SDKMAN_DIR'
+                    sh 'echo $NVM_DIR'
                     sh 'npm -v'
                 }
             }
