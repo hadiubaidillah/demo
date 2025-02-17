@@ -9,8 +9,8 @@ pipeline {
 		CREDENTIALS_ID = 'hadi'
         EXCLUDE_FOLDERS = '.env,.kotlin,gradle'
 
-        JAVA_HOME = '~/.sdkman/candidates/java/current'
-        GRAALVM_HOME = '~/.sdkman/candidates/java/current'
+        JAVA_HOME = '/home/jenkins-agent/.sdkman/candidates/java/current'
+        GRAALVM_HOME = '/home/jenkins-agent/.sdkman/candidates/java/current'
         PATH = "${JAVA_HOME}/bin:${env.PATH}"
 	}
 
