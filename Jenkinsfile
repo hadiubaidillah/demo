@@ -70,6 +70,7 @@ pipeline {
             }
             steps {
                 dir('frontend/todo') {
+                    sh 'which npm'
                     sh 'npm install'
                     sh 'npm run build'
                 }
